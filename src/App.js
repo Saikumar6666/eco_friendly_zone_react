@@ -10,10 +10,14 @@ import Shop from './components/Shop';
 import './assets/styles/main.css';
 import { AuthProvider } from './AuthContext';
 import Dashboard from './pages/Dashboard';
+import Cart from './components/Cart';
+import { CartProvider } from './CartContext';
+import Checkout from './components/Checkout';
 
 function App() {
   return (
     <AuthProvider>
+      <CartProvider>
       <Router>
         <div className="app">
           <Navbar />
@@ -26,12 +30,15 @@ function App() {
               <Route path="/register" element={<Registration />} />
               <Route path="/shop" element={<Shop />} />
               <Route path="/dashboard" element={<Dashboard />} />
-              {/* <Route path="/admin" element={<AdminPanel />} /> */}
+              <Route path="/cart" element={<Cart />} />
+              <Route path="/checkout" element={<Checkout />} />
+
             </Routes>
           </div>
           {/* <Footer /> */}
         </div>
       </Router>
+      </CartProvider>
     </AuthProvider>
   );
 }
