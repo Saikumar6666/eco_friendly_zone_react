@@ -18,35 +18,44 @@ const Login = () => {
   };
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
-    setIsLoading(true);
-    setError('');
+  e.preventDefault();
+  setIsLoading(true);
+  setError('');
 
-    try {
-      const res = await fetch('http://localhost:5001/eco_zone/autenticate/login', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          userEmail: credentials.email,
-          Password: credentials.password
-        })
-      });
+  try {
+    const res = await fetch('http://localhost:5001/eco_zone/autenticate/login', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        userEmail: credentials.email,
+        Password: credentials.password
+      })
+    });
 
-      const data = await res.json();
+    const data = await res.json();
 
-      if (data.status === 200) {
-        login(data.token, data.results[0]); // ✅ this updates context and Navbar
-        alert('Login successful!');
-        navigate('/shop');
+    if (data.status === 200) {
+      const user = data.results[0];
+      login(data.token, user); // ✅ Update context
+
+      alert('Login successful!');
+
+      // ✅ Redirect based on role
+      if (user.role === 'admin') {
+        navigate('/admin/products');
       } else {
-        setError(data.message || 'Login failed');
+        navigate('/shop');
       }
-    } catch (err) {
-      setError('Network error. Please try again.');
-    } finally {
-      setIsLoading(false);
+    } else {
+      setError(data.message || 'Login failed');
     }
-  };
+  } catch (err) {
+    setError('Network error. Please try again.');
+  } finally {
+    setIsLoading(false);
+  }
+};
+
 
   return (
     <div className="auth-page">

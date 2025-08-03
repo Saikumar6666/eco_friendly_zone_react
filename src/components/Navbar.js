@@ -1,13 +1,13 @@
 import React, { useContext, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import {
-  FaLeaf, FaBars, FaTimes, FaUser, FaShoppingCart, FaChartBar, FaStore
+  FaLeaf, FaBars, FaTimes, FaUser, FaShoppingCart, FaChartBar, FaStore, FaTools
 } from 'react-icons/fa';
 import { AuthContext } from '../AuthContext';
 
 const Navbar = () => {
   const [isMobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const { isLoggedIn, logout } = useContext(AuthContext);
+  const { isLoggedIn, logout, user } = useContext(AuthContext); // 👈 include user
   const navigate = useNavigate();
 
   const handleLogout = () => {
@@ -31,6 +31,13 @@ const Navbar = () => {
         <ul className={isMobileMenuOpen ? 'nav-menu active' : 'nav-menu'}>
           {isLoggedIn ? (
             <>
+              {user?.role === 'admin' && (
+                <li className="nav-item">
+                  <Link to="/admin" className="nav-links" onClick={() => setMobileMenuOpen(false)}>
+                    <FaTools /> Admin
+                  </Link>
+                </li>
+              )}
               <li className="nav-item">
                 <Link to="/dashboard" className="nav-links" onClick={() => setMobileMenuOpen(false)}>
                   <FaChartBar /> Dashboard

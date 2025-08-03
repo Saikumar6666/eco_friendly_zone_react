@@ -14,30 +14,40 @@ import Cart from './components/Cart';
 import { CartProvider } from './CartContext';
 import Checkout from './components/Checkout';
 
+// ✅ Admin Panel
+import AdminPanel from './components/AdminPanel';
+import AdminProducts from './components/AdminProducts';
+import AdminDashboard from './components/AdminDashboard';
+import AdminOrders from './components/AdminOrders';
+
 function App() {
   return (
     <AuthProvider>
       <CartProvider>
-      <Router>
-        <div className="app">
-          <Navbar />
-          <div className="main-content">
-            <Routes>
-              <Route path="/" element={<HomeScreen />} />
-              <Route path="/about" element={<AboutUs />} />
-              <Route path="/contact" element={<ContactUs />} />
-              <Route path="/login" element={<Login />} />
-              <Route path="/register" element={<Registration />} />
-              <Route path="/shop" element={<Shop />} />
-              <Route path="/dashboard" element={<Dashboard />} />
-              <Route path="/cart" element={<Cart />} />
-              <Route path="/checkout" element={<Checkout />} />
+        <Router>
+          <div className="app">
+            <Navbar />
+            <div className="main-content">
+              <Routes>
+                {/* Public Routes */}
+                <Route path="/" element={<HomeScreen />} />
+                <Route path="/about" element={<AboutUs />} />
+                <Route path="/contact" element={<ContactUs />} />
+                <Route path="/login" element={<Login />} />
+                <Route path="/register" element={<Registration />} />
+                <Route path="/shop" element={<Shop />} />
+                <Route path="/dashboard" element={<Dashboard />} />
+                <Route path="/cart" element={<Cart />} />
+                <Route path="/checkout" element={<Checkout />} />
 
-            </Routes>
+                {/* ✅ Admin Routes */}
+                <Route path="/admin" element={<AdminDashboard />} />
+                <Route path="/admin/products" element={<AdminProducts />} />
+                <Route path="/admin/orders" element={<AdminOrders />} />
+              </Routes>
+            </div>
           </div>
-          {/* <Footer /> */}
-        </div>
-      </Router>
+        </Router>
       </CartProvider>
     </AuthProvider>
   );
