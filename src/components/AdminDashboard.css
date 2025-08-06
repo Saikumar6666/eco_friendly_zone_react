@@ -1,39 +1,61 @@
 .admin-dashboard {
   padding: 2rem;
-  background-color: #f8f9fa;
-  min-height: 100vh;
+  background-color: #f7f9fb;
+  min-height: 90vh;
 }
 
-.admin-dashboard h2 {
+.admin-title {
+  color: #14532d;
   font-size: 2rem;
-  margin-bottom: 1rem;
+  margin-bottom: 2rem;
+  text-align: center;
 }
 
-.stats-grid {
+.stats-container {
   display: flex;
-  gap: 1.5rem;
+  justify-content: space-around;
   flex-wrap: wrap;
+  gap: 1.5rem;
   margin-bottom: 2rem;
 }
 
 .stat-card {
+  flex: 1 1 250px;
   background: white;
+  border-radius: 10px;
   padding: 1.5rem;
-  border-radius: 8px;
-  box-shadow: 0 0 6px rgba(0, 0, 0, 0.1);
-  flex: 1;
-  min-width: 200px;
   text-align: center;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  transition: transform 0.2s ease;
 }
 
-.stat-card h3 {
+.stat-card:hover {
+  transform: translateY(-5px);
+}
+
+.stat-icon {
+  font-size: 2rem;
+  color: #10b981;
   margin-bottom: 0.5rem;
-  font-size: 1.1rem;
-  color: #555;
 }
 
-.stat-card p {
-  font-size: 1.8rem;
+.admin-links {
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.admin-link-btn {
+  padding: 0.75rem 1.5rem;
+  background-color: #14532d;
+  color: white;
+  text-decoration: none;
+  border-radius: 6px;
   font-weight: bold;
-  color: #2c3e50;
+  transition: background-color 0.2s;
+}
+
+.admin-link-btn:hover {
+  background-color: #0d3c1f;
 }

@@ -15,10 +15,11 @@ import { CartProvider } from './CartContext';
 import Checkout from './components/Checkout';
 
 // ✅ Admin Panel
-import AdminPanel from './components/AdminPanel';
+// import AdminPanel from './components/AdminPanel';
 import AdminProducts from './components/AdminProducts';
 import AdminDashboard from './components/AdminDashboard';
 import AdminOrders from './components/AdminOrders';
+import AdminMessages from './components/AdminMessages';
 
 function App() {
   return (
@@ -44,6 +45,8 @@ function App() {
                 <Route path="/admin" element={<AdminDashboard />} />
                 <Route path="/admin/products" element={<AdminProducts />} />
                 <Route path="/admin/orders" element={<AdminOrders />} />
+                <Route path="/admin/messages" element={<AdminMessages />} />
+                {/* <Route path="/adminpanel" element={<AdminPanel />} /> */}
               </Routes>
             </div>
           </div>

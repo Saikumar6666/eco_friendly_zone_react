@@ -36,13 +36,13 @@ const Login = () => {
 
     if (data.status === 200) {
       const user = data.results[0];
-      login(data.token, user); // ✅ Update context
+      login(data.token, user);
 
       alert('Login successful!');
 
       // ✅ Redirect based on role
       if (user.role === 'admin') {
-        navigate('/admin/products');
+        navigate('/admin');
       } else {
         navigate('/shop');
       }

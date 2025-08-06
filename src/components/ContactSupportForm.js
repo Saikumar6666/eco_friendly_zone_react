@@ -17,16 +17,27 @@ const ContactUs = () => {
     }));
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    alert('Thanks for contacting EcoZone! We’ll respond shortly.');
-    setFormData({
-      name: '',
-      email: '',
-      subject: '',
-      message: ''
+  const handleSubmit = async (e) => {
+  e.preventDefault();
+  try {
+    const res = await fetch('http://localhost:5001/eco_zone/contact', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(formData),
     });
-  };
+
+    const data = await res.json();
+    if (res.ok) {
+      alert(data.message || 'Message sent successfully!');
+      setFormData({ name: '', email: '', subject: '', message: '' });
+    } else {
+      alert(data.message || 'Failed to send message.');
+    }
+  } catch (err) {
+    alert('Network error, please try again later.');
+  }
+};
+
 
   return (
     <div className="contact-us">

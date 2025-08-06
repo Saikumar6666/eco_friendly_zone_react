@@ -1,13 +1,14 @@
 import React, { useContext, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import {
-  FaLeaf, FaBars, FaTimes, FaUser, FaShoppingCart, FaChartBar, FaStore, FaTools
+  FaLeaf, FaBars, FaTimes, FaUser, FaShoppingCart, FaChartBar, FaStore, FaTools,
+  FaBoxOpen, FaInbox, FaHome, FaPhone, FaSignInAlt
 } from 'react-icons/fa';
 import { AuthContext } from '../AuthContext';
 
 const Navbar = () => {
   const [isMobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const { isLoggedIn, logout, user } = useContext(AuthContext); // 👈 include user
+  const { isLoggedIn, logout, user } = useContext(AuthContext);
   const navigate = useNavigate();
 
   const handleLogout = () => {
@@ -32,17 +33,36 @@ const Navbar = () => {
           {isLoggedIn ? (
             <>
               {user?.role === 'admin' && (
+                <>
+                  <li className="nav-item">
+                    <Link to="/admin" className="nav-links" onClick={() => setMobileMenuOpen(false)}>
+                      <FaTools /> Admin Dashboard
+                    </Link>
+                  </li>
+                  <li className="nav-item">
+                    <Link to="/admin/products" className="nav-links" onClick={() => setMobileMenuOpen(false)}>
+                      <FaBoxOpen /> Products
+                    </Link>
+                  </li>
+                  <li className="nav-item">
+                    <Link to="/admin/orders" className="nav-links" onClick={() => setMobileMenuOpen(false)}>
+                      <FaShoppingCart /> Orders
+                    </Link>
+                  </li>
+                  <li className="nav-item">
+                    <Link to="/admin/messages" className="nav-links" onClick={() => setMobileMenuOpen(false)}>
+                      <FaInbox /> Messages
+                    </Link>
+                  </li>
+                </>
+              )}
+              {user?.role !== 'admin' && (
                 <li className="nav-item">
-                  <Link to="/admin" className="nav-links" onClick={() => setMobileMenuOpen(false)}>
-                    <FaTools /> Admin
+                  <Link to="/dashboard" className="nav-links" onClick={() => setMobileMenuOpen(false)}>
+                    <FaChartBar /> Dashboard
                   </Link>
                 </li>
               )}
-              <li className="nav-item">
-                <Link to="/dashboard" className="nav-links" onClick={() => setMobileMenuOpen(false)}>
-                  <FaChartBar /> Dashboard
-                </Link>
-              </li>
               <li className="nav-item">
                 <Link to="/shop" className="nav-links" onClick={() => setMobileMenuOpen(false)}>
                   <FaStore /> Shop
@@ -62,16 +82,18 @@ const Navbar = () => {
           ) : (
             <>
               <li className="nav-item">
-                <Link to="/" className="nav-links" onClick={() => setMobileMenuOpen(false)}>Home</Link>
+                <Link to="/" className="nav-links" onClick={() => setMobileMenuOpen(false)}><FaHome /> Home</Link>
               </li>
               <li className="nav-item">
                 <Link to="/about" className="nav-links" onClick={() => setMobileMenuOpen(false)}>About</Link>
               </li>
               <li className="nav-item">
-                <Link to="/contact" className="nav-links" onClick={() => setMobileMenuOpen(false)}>Contact</Link>
+                <Link to="/contact" className="nav-links" onClick={() => setMobileMenuOpen(false)}><FaPhone /> Contact</Link>
               </li>
               <li className="nav-item">
-                <Link to="/login" className="nav-links" onClick={() => setMobileMenuOpen(false)}>Login</Link>
+                <Link to="/login" className="nav-links" onClick={() => setMobileMenuOpen(false)}>
+                  <FaSignInAlt /> Login
+                </Link>
               </li>
             </>
           )}

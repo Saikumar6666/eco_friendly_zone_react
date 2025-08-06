@@ -7,7 +7,7 @@ const AdminProducts = () => {
   const [editingId, setEditingId] = useState(null);
 
   const fetchProducts = async () => {
-    const res = await fetch('http://localhost:5001/eco_zone/admin/products');
+    const res = await fetch('http://localhost:5001/eco_zone/admin/products?role=admin');
     const data = await res.json();
     if (res.ok) setProducts(data.products);
   };
@@ -22,8 +22,8 @@ const AdminProducts = () => {
     for (let key in formData) form.append(key, formData[key]);
 
     const url = editingId
-      ? `http://localhost:5001/eco_zone/admin/products/${editingId}`
-      : 'http://localhost:5001/eco_zone/admin/products';
+      ? `http://localhost:5001/eco_zone/admin/products/${editingId}?role=admin`
+      : 'http://localhost:5001/eco_zone/admin/products?role=admin';
     const method = editingId ? 'PUT' : 'POST';
 
     const res = await fetch(url, {
@@ -47,7 +47,7 @@ const AdminProducts = () => {
   };
 
   const handleDelete = async (id) => {
-    const res = await fetch(`http://localhost:5001/eco_zone/admin/products/${id}`, { method: 'DELETE' });
+    const res = await fetch(`http://localhost:5001/eco_zone/admin/products/${id}?role=admin`, { method: 'DELETE' });
     if (res.ok) fetchProducts();
     else alert('Delete failed');
   };
@@ -65,7 +65,7 @@ const AdminProducts = () => {
       <div className="product-list">
         {products.map(p => (
           <div key={p.id} className="product-item">
-            <img src={p.image || '/images/products/default.jpg'} alt={p.name} />
+            <img src={`http://localhost:5001/uploads/${p.image}`} alt={p.name} />
             <h4>{p.name}</h4>
             <p>{p.description}</p>
             <p>£{p.price.toFixed(2)}</p>

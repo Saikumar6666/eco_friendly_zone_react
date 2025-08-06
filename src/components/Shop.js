@@ -74,7 +74,7 @@ const Shop = () => {
         {products.map(product => (
           <div className="product-card" key={product.id}>
             <img
-              src={product.image || '/images/products/default.jpg'}
+              src={`http://localhost:5001/uploads/${product.image}`}
               alt={product.name}
               className="product-image"
             />
